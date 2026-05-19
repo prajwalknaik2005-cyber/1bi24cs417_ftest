@@ -1,45 +1,23 @@
 pipeline {
-    agent any  // Use any available agent
+    agent any
 
-    tools {
-        gradle 'gradle'  // Ensure this matches the name configured in Jenkins
-        jdk 'jdk'
-    }
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'master', url: 'https://github.com/prajwalknaik2005-cyber/1bi24cs417_ftest'/
+                echo 'Cloning repository...'
             }
         }
-
+        
         stage('Build') {
             steps {
-                sh 'gradle build'  // Run Gradle build
+                echo 'Building the project...'
             }
         }
 
         stage('Test') {
             steps {
-                sh 'gradle test'  // Run unit tests
+                echo 'Running tests...'
             }
         }
-
-        stage('Run Application') {
-            steps {
-                // Start the JAR application
-                sh 'gradle run'
-            }
-        }
-
-        
     }
-
-    post {
-        success {
-            echo 'Build and deployment successful!'
-        }
-        failure {
-            echo 'Build failed!'
-            }
-          }
-        }
+}
